@@ -125,6 +125,7 @@ void Renderer::DrawRectangle(float x, float y, float size, float width, float r,
 
     float halfSize = size / 2.0f;
     float halfWidth = width / 2.0f;
+    halfWidth = halfWidth / m_AspectRatio;  // Apply aspect ratio correction
 
     // Bottom left
     Vertices.push_back({ x - halfWidth, y - halfSize, r, g, b, a, 0.0f, 0.0f, 0.0f });
@@ -142,7 +143,7 @@ void Renderer::DrawRectangle(float x, float y, float size, float width, float r,
 void Renderer::SetAspectRatio(float aspectRatio)
 {
     m_AspectRatio = aspectRatio;
-}   
+}
 
 void Renderer::DrawCircle(float x, float y, float radius, float r, float g, float b, float a)
 {

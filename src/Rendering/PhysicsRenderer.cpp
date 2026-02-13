@@ -66,12 +66,12 @@ bool PhysicsEngine::Init(const char* title)
 	float groundPosition = -0.8;
 	float groundHeight = 0.2;
 	float bounceLevel = 0.5;
-	float groundWidth = 1.6f / aspectRatio;
+	float groundWidth = 1.6f;  // Un-compensated width, renderer will apply aspect ratio
 
-	m_PhysicsLayer = new Physics(gravity, groundPosition, groundHeight, groundWidth, bounceLevel);
+	m_PhysicsLayer = new Physics(gravity, groundPosition, groundHeight, groundWidth, bounceLevel, aspectRatio);
 
 	// Remove later, Just a rectangle at bottom of screen
-	m_Shapes.push_back({ShapeType::Rectangle, 0.0f, groundPosition, groundHeight, groundWidth + 0.1f,
+	m_Shapes.push_back({ ShapeType::Rectangle, 0.0f, groundPosition, groundHeight, groundWidth,
 		0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, true });
 
 	return true;

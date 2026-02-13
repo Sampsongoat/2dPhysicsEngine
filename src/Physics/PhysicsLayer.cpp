@@ -1,8 +1,8 @@
 #include "Physics/PhysicsLayer.h"
 
-Physics::Physics(float gravity, float groundPosition, float groundHeight, float groundWidth, float bounceLevel)
+Physics::Physics(float gravity, float groundPosition, float groundHeight, float groundWidth, float bounceLevel, float aspectRatio)
 	: m_Gravity(gravity), m_GroundPosition(groundPosition),
-	m_GroundHeight(groundHeight), m_GroundWidth(groundWidth), m_BounceLevel(bounceLevel)
+	m_GroundHeight(groundHeight), m_GroundWidth(groundWidth), m_BounceLevel(bounceLevel), m_AspectRatio(aspectRatio)
 {
 }
 
@@ -39,7 +39,7 @@ void Physics::ApplyGravity(Shape& shape)
 	shape.yVcty = shape.yVcty - m_Gravity;
 }
 
-void Physics::UpdatePosition(Shape& shape) 
+void Physics::UpdatePosition(Shape& shape)
 {
 	shape.x = shape.x + shape.xVcty;
 	shape.y = shape.y + shape.yVcty;
@@ -48,24 +48,24 @@ void Physics::UpdatePosition(Shape& shape)
 void Physics::CheckGroundCollision(Shape& shape)
 {
 	float topOfGround = m_GroundPosition + (m_GroundHeight / 2);
-	float groundLeftBoundary = 0.0 - (m_GroundWidth / 2);
-	float groundRightBoundary = 0.0 + (m_GroundWidth / 2);
+	float groundLeftBoundary = 0.0 - (m_GroundWidth / 2 / m_AspectRatio);
+	float groundRightBoundary = 0.0 + (m_GroundWidth / 2 / m_AspectRatio);
 
 	float halfHeight, halfWidth;
 	if (shape.shape == ShapeType::Circle)
 	{
-		halfHeight = shape.size / 3.5f;
-		halfWidth = shape.size / 3.5f;
+		halfHeight = shape.size / 3.75f;
+		halfWidth = (shape.size / 3.75f) / m_AspectRatio;
 	}
 	else if (shape.shape == ShapeType::Square)
 	{
 		halfHeight = shape.size / 2.0f;
-		halfWidth = shape.size / 2.0f;
+		halfWidth = (shape.size / 2.0f) / m_AspectRatio;
 	}
 	else
 	{
 		halfHeight = shape.size / 2.0f;
-		halfWidth = shape.size / 2.0f;
+		halfWidth = (shape.size / 2.0f) / m_AspectRatio;
 	}
 
 	float bottomOfShape = shape.y - halfHeight;
