@@ -216,7 +216,7 @@ void Physics::ApplyCircleCollision(Shape& circle1, Shape& circle2)
 		circle2.y += normalizedY * overlap * 0.5;
 
 		float relativeVelocityX = circle2.xVcty - circle1.xVcty;
-		float relativeVelocityY = circle2.yVcty - circle1.xVcty;
+		float relativeVelocityY = circle2.yVcty - circle1.yVcty;
 
 		float velocityAlongNormal = (relativeVelocityX * normalizedX) + (relativeVelocityY * normalizedY);
 
