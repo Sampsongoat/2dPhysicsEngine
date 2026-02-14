@@ -26,6 +26,7 @@ void Physics::Update(std::vector<Shape>& shapes, float dt)
 	}
 
 	UpdateObjectCollisions(shapes);
+	DeleteObjectsOutOfFrame(shapes);
 
 	for (auto& shape : shapes)
 	{
@@ -54,6 +55,19 @@ void Physics::UpdateObjectCollisions(std::vector<Shape>& shapes)
 			{
 				ApplySquareCollision(shapes[i], shapes[j]);
 			}
+		}
+	}
+}
+
+void Physics::DeleteObjectsOutOfFrame(std::vector<Shape>& shapes)
+{
+	for (auto& shape : shapes)
+	{
+		if (shape.x < -1.5f || shape.x > 1.5f || shape.y < -2.0f || shape.y > 1.5f)
+		{
+			shape.noMovement = true;
+
+			// implement removing from vector in the future
 		}
 	}
 }

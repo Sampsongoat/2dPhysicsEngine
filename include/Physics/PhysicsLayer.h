@@ -58,4 +58,5 @@ private:
 	void ApplyCircleSquareCollision(Shape& circle, Shape& square);
 	void UpdateObjectCollisions(std::vector<Shape>& shapes);
 
+	void DeleteObjectsOutOfFrame(std::vector<Shape>& shapes);
 };
