@@ -137,7 +137,6 @@ m_Restitution = 0.7f;
 
 ## 🛠️ Known Limitations / Future Work
 
-- [ ] Circle-square collision detection not yet implemented (`ApplyCircleSquareCollision` is stubbed)
 - [ ] No spatial partitioning (O(n²) collision checks — fine for hundreds of objects)
 - [ ] `IsTouchingAnything` has an edge case that returns `true` for mixed shape types unconditionally
 - [ ] No object removal / max object cap beyond `MaxQuads` renderer limit
